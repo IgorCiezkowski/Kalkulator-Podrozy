@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup RgType;
     TextView TvCost, TvPerPers;
     Button btn;
+    float dist, fuel, passengers;
+
+
 
 
     @Override
@@ -42,9 +45,20 @@ public class MainActivity extends AppCompatActivity {
 
 
             btn.setOnClickListener(view -> {
-
-
-
+                dist = Float.parseFloat(String.valueOf(EtDist.getText()));
+                fuel = Float.parseFloat(String.valueOf(EtFuel.getText()));
+                passengers = Float.parseFloat(String.valueOf(EtPas.getText()));
+                if (RgType.getCheckedRadioButtonId() == R.id.RbBen){
+                    TvCost.setText("Całkowity koszt: "+((dist/100)*fuel*6.5)+" zł");
+                    TvPerPers.setText("Na osobę: "+((dist/100)*fuel*6.5)/(passengers+1)+" zł");
+                } else if (RgType.getCheckedRadioButtonId() == R.id.RbDis) {
+                    TvCost.setText("Całkowity koszt: "+((dist/100)*fuel*6.7)+" zł");
+                    TvPerPers.setText("Na osobę: "+((dist/100)*fuel*6.7)/(passengers+1)+" zł");
+                }
+                else{
+                    TvCost.setText("Całkowity koszt: "+((dist/100)*fuel*3.1)+" zł");
+                    TvPerPers.setText("Na osobę: "+((dist/100)*fuel*3.1)/(passengers+1)+" zł");
+                }
             });
 
             return insets;
